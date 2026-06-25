@@ -1,0 +1,1 @@
+- CSV writer has its own internal buffer - DO NOT NEED TO WRAP IN BUFFER
