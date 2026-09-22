@@ -152,13 +152,13 @@ chrom,pos,ref,alt,vartype
 11,25972599,AATC,A,DEL
 ```
 
-Another note; varlap currently support delins example below
+Another note; varlap currently doesn't support delins (example below)
 ```
 2026-09-20T00:38:56.117233Z  WARN rust_varlap::variant_parser: Cannot determine the type of variant with ref:CA and alt:AG
 2026-09-20T00:38:56.117255Z  WARN rust_varlap::variant_parser: Cannot determine the type of variant with ref:GTG and alt:CAT
 ```
 
-Also, it may misclassify delins as indels, or being unable to determine SNVs
+Also, it may misclassify delins as indels, or be unable to determine SNVs
 ```
 2026-09-20T00:38:56.109056Z  WARN rust_varlap::variant_parser: Cannot determine the type of variant with ref:CAA and alt:AAA
 ```
@@ -174,3 +174,4 @@ To fix this, we can maybe implement these steps:
     - else, UNKNOWN (e.g. empty ref/alt as we have set them to be optional in our feature counts (need to implement in variant parser/binning))
 
 For DELINS, we can reuse the INDEL feature count, but instead of walking the CIGAR string it may be better to just compare the reads where the position of the variant spans directly.
+
