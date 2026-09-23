@@ -15,7 +15,7 @@ Looking at the relevant fields
 
 ![1334404](images/1334404.png)
 
-Looking at IGV, there is one DEL that represents the CAA -> C. We can see that there is 1 count that supports the `alt` read, and there are 2 overlapping indels.
+Looking at IGV, there is one DEL that represents the CAA -> C. We can see that there is 1 count that supports the `alt` read, and there are 2 overlapping indels, which match with what varlap calculates.
 
 However, there is also an insertion C -> CA, whch is represented as CAA -> CAAA. While there is a read that supports the `alt` read, varlap does not count it; we also see that there is no count for overlapping indels when it should be 2 (the same as the other variant as they share the same position).
 
