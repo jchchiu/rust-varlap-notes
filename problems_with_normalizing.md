@@ -6,10 +6,18 @@ chrom,pos,ref,alt,vartype,pos_normalized,sample,depth, ref_count, alt_count, oth
 11,1334404,CAA,CAAA,INS,0.009883997006485228,,5,3,0,2,0.0,0,1.0,...
 ```
 
+Looking at the relevant fields
+
+| chrom |     pos | ref | alt  | vartype | depth | ref_count | alt_count | other_count | overlapping_indels_count |
+| ----- | ------: | --- | ---- | ------- | ----: | --------: | --------: | ----------: | -----------------------: |
+| 11    | 1334404 | CAA | C    | DEL     |     5 |         1 |         1 |           3 |                        2 |
+| 11    | 1334404 | CAA | CAAA | INS     |     5 |         3 |         0 |           2 |                        0 |
+
 ![1334404](images/1334404.png)
 
-Looking at IGV, there is one DEL that represents the CAA -> C.
-However, there is also an insertion C -> CA, whch is represented as CAA -> CAAA.
+Looking at IGV, there is one DEL that represents the CAA -> C. We can see that there is 1 count that supports the `alt` read, and there are 2 overlapping indels.
+
+However, there is also an insertion C -> CA, whch is represented as CAA -> CAAA. While there is a read that supports the `alt` read, varlap does not count it; we also see that there is no count for overlapping indels when it should be 2 (the same as the other variant as they share the same position).
 
 In our program, we calculate the start of an INDEL using
 ```
@@ -152,7 +160,7 @@ chrom,pos,ref,alt,vartype
 11,25972599,AATC,A,DEL
 ```
 
-Another note; varlap currently doesn't support delins (example below)
+Another note; varlap currently doesn't support delins/mnp (example below)
 ```
 2026-09-20T00:38:56.117233Z  WARN rust_varlap::variant_parser: Cannot determine the type of variant with ref:CA and alt:AG
 2026-09-20T00:38:56.117255Z  WARN rust_varlap::variant_parser: Cannot determine the type of variant with ref:GTG and alt:CAT
