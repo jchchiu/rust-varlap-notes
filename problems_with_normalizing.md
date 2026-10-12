@@ -13,6 +13,15 @@ Looking at the relevant fields
 | 11    | 1334404 | CAA | C    | DEL     |     5 |         1 |         1 |           3 |                        2 |
 | 11    | 1334404 | CAA | CAAA | INS     |     5 |         3 |         0 |           2 |                        0 |
 
+<details>
+  <summary>(Click to expand) After updating with the normalization, this is the output we get </summary>
+
+| chrom |     pos | ref | alt  | vartype | depth | ref_count | alt_count | other_count | overlapping_indels_count |
+| ----- | ------: | --- | ---- | ------- | ----: | --------: | --------: | ----------: | -----------------------: |
+| 11    | 1334404 | CAA | C    | DEL     |     5 |         1 |         1 |           3 |                        2 |
+| 11    | 1334404 | C   | CA   | INS     |     5 |         2 |         1 |           2 |                        2 |
+</details><br>
+
 ![1334404](images/1334404.png)
 
 Looking at IGV, there is one DEL that represents the CAA -> C. We can see that there is 1 count that supports the `alt` read, and there are 2 overlapping indels, which match with what varlap calculates.
